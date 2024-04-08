@@ -1,13 +1,23 @@
-const Options = ({ updateFeedback, feedbackButtons }) => {
-  const buttonItems = Object.keys(feedbackButtons).map((arrayItem, index) => {
+const Options = ({ onUpdate, onReset, buttons, totalFeedback }) => {
+  const buttonItems = Object.keys(buttons).map((arrayItem, index) => {
     return (
-      <button onClick={updateFeedback} key={index} type="button">
+      <button onClick={onUpdate} key={index} type="button">
         {arrayItem}
       </button>
     );
   });
+  const resetButton = (
+    <button onClick={onReset} type="button">
+      reset
+    </button>
+  );
 
-  return <>{buttonItems}</>;
+  return (
+    <>
+      {buttonItems}
+      {totalFeedback > 0 && resetButton}
+    </>
+  );
 };
 
 export default Options;
