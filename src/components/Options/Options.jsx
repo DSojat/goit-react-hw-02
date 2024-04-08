@@ -1,7 +1,13 @@
-const Options = () => {
+const Options = ({ updateFeedback, feedbackButtons }) => {
+  
+  const buttonItems = (Object.keys(feedbackButtons))
+    .map((arrayItem, index) => {
+    return <button onClick={updateFeedback} key={index} type="button">{arrayItem}</button>;
+  });
+  
   return (
     <>
-      <button type="button">Good</button>
+     {buttonItems}
     </>
   );
 };
