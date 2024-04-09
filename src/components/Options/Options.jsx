@@ -1,22 +1,28 @@
+import css from './Options.module.css';
 const Options = ({ onUpdate, onReset, buttons, totalFeedback }) => {
   const buttonItems = Object.keys(buttons).map((arrayItem, index) => {
     return (
-      <button onClick={onUpdate} key={index} type="button">
+      <button
+        className={css.optionsBtn}
+        onClick={onUpdate}
+        key={index}
+        type="button"
+      >
         {arrayItem}
       </button>
     );
   });
   const resetButton = (
-    <button onClick={onReset} type="button">
+    <button className={css.optionsBtn} onClick={onReset} type="button">
       reset
     </button>
   );
 
   return (
-    <>
+    <div className={css.optionsBox}>
       {buttonItems}
       {totalFeedback > 0 && resetButton}
-    </>
+    </div>
   );
 };
 
