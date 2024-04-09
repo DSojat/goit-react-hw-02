@@ -53,7 +53,7 @@ export default function App() {
           totalFeedback={totalFeedback}
         ></Feedback>
       ) : (
-        <Notification></Notification>
+        <Notification>No feedback yet</Notification>
       )}
     </>
   );
