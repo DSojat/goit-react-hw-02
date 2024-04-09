@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Options from '../Options/Options';
 import Feedback from '../Feedback/Feedback';
 import Notification from '../Notification/Notification';
@@ -7,7 +7,17 @@ import css from './App.module.css';
 export default function App() {
   const startFeedbackButtons = { good: 0, neutral: 0, bad: 0 };
 
-  const [feedbacks, setFeedback] = useState(startFeedbackButtons);
+  const [feedbacks, setFeedback] = useState(() => {
+    const savedObject = window.localStorage.getItem('saved-clicks');
+    if (savedObject !== null) {
+      return JSON.parse(savedObject);
+    }
+    return startFeedbackButtons;
+  });
+
+  useEffect(() => {
+    window.localStorage.setItem('saved-clicks', JSON.stringify(feedbacks));
+  }, [feedbacks]);
 
   let totalFeedback = 0;
   for (const key in feedbacks) {
