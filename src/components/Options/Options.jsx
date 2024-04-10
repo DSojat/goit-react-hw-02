@@ -1,6 +1,8 @@
 import css from './Options.module.css';
+
 const Options = ({ onUpdate, onReset, buttons, totalFeedback }) => {
-  const buttonItems = Object.keys(buttons).map((arrayItem, index) => {
+  //формуємо розмітку кнопок з масиву за кількістю та найменуваннями
+  const customButtonSet = buttons.map((buttonName, index) => {
     return (
       <button
         className={css.optionsBtn}
@@ -8,10 +10,11 @@ const Options = ({ onUpdate, onReset, buttons, totalFeedback }) => {
         key={index}
         type="button"
       >
-        {arrayItem}
+        {buttonName}
       </button>
     );
   });
+  //формуємо розмітку кнопки скидання
   const resetButton = (
     <button className={css.optionsBtn} onClick={onReset} type="button">
       reset
@@ -20,7 +23,7 @@ const Options = ({ onUpdate, onReset, buttons, totalFeedback }) => {
 
   return (
     <div className={css.optionsBox}>
-      {buttonItems}
+      {customButtonSet}
       {totalFeedback > 0 && resetButton}
     </div>
   );

@@ -1,9 +1,9 @@
 import css from './Feedback.module.css';
 
-const Feedback = ({ feedbacks, totalFeedback }) => {
+const Feedback = ({ feedbacks, positiveFeedback, totalFeedback }) => {
   const keys = Object.keys(feedbacks);
   const values = Object.values(feedbacks);
-  const positiveFeedbacks = feedbacks.good;
+
   if (totalFeedback > 0) {
     const feedbackItems = keys.map((arrayItem, index) => {
       return (
@@ -17,9 +17,7 @@ const Feedback = ({ feedbacks, totalFeedback }) => {
       <div>
         {feedbackItems}
         <p className={css.text}>total: {totalFeedback}</p>
-        <p className={css.text}>
-          positive: {Math.round((positiveFeedbacks / totalFeedback) * 100)}%
-        </p>
+        <p className={css.text}>positive: {positiveFeedback}%</p>
       </div>
     );
   }

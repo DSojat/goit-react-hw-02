@@ -1,11 +1,16 @@
 import { useState, useEffect } from 'react';
+import Description from '../Description/Description';
 import Options from '../Options/Options';
 import Feedback from '../Feedback/Feedback';
 import Notification from '../Notification/Notification';
-import css from './App.module.css';
+import css from '../App/App.module.css';
 
 export default function App() {
+  //задаємо стартові значення відгуків за типами
   const startFeedbackButtons = { good: 0, neutral: 0, bad: 0 };
+
+  //формуємо масив найменувань кнопок за назвами типів відгуків
+  const buttonsNamesArray = Object.keys(startFeedbackButtons);
 
   const [feedbacks, setFeedback] = useState(() => {
     const savedObject = window.localStorage.getItem('saved-clicks');
@@ -19,10 +24,16 @@ export default function App() {
     window.localStorage.setItem('saved-clicks', JSON.stringify(feedbacks));
   }, [feedbacks]);
 
-  let totalFeedback = 0;
-  for (const key in feedbacks) {
-    totalFeedback += feedbacks[key];
-  }
+  const feedbackSummary = (feedbackClick = 0) => {
+    for (const key in feedbacks) {
+      feedbackClick += feedbacks[key];
+    }
+    return feedbackClick;
+  };
+
+  const percentPositiveFb = Math.round(
+    (feedbacks.good / feedbackSummary()) * 100
+  );
 
   const updateFeedback = feedbackType => {
     const buttonName = feedbackType.target.textContent;
@@ -36,21 +47,24 @@ export default function App() {
 
   return (
     <>
-      <h1 className={css.title}>Sip Happens Café</h1>
-      <p className={css.text}>
-        Please leave your feedback about our service by selecting one of the
-        options below.
-      </p>
+      <div className={css.descriptionBox}>
+        <Description type="title">Sip Happens Café</Description>
+        <Description type="text">
+          Please leave your feedback about our service by selecting one of the
+          options below.
+        </Description>
+      </div>
       <Options
         onUpdate={updateFeedback}
         onReset={resetFeedback}
-        buttons={startFeedbackButtons}
-        totalFeedback={totalFeedback}
+        buttons={buttonsNamesArray}
+        totalFeedback={feedbackSummary()}
       ></Options>
-      {totalFeedback ? (
+      {feedbackSummary() ? (
         <Feedback
           feedbacks={feedbacks}
-          totalFeedback={totalFeedback}
+          totalFeedback={feedbackSummary()}
+          positiveFeedback={percentPositiveFb}
         ></Feedback>
       ) : (
         <Notification>No feedback yet</Notification>
