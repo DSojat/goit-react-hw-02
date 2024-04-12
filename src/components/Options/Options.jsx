@@ -9,6 +9,7 @@ const Options = ({ onUpdate, onReset, buttons, totalFeedback }) => {
         onClick={onUpdate}
         key={index}
         type="button"
+        value={buttonName}
       >
         {buttonName}
       </button>

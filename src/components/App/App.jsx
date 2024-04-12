@@ -36,8 +36,11 @@ export default function App() {
   );
 
   const updateFeedback = feedbackType => {
-    const buttonName = feedbackType.target.textContent;
-    const setValue = { ...feedbacks, [buttonName]: feedbacks[buttonName] + 1 };
+    const feedbackValue = feedbackType.target.value;
+    const setValue = {
+      ...feedbacks,
+      [feedbackValue]: feedbacks[feedbackValue] + 1,
+    };
     setFeedback(setValue);
   };
 
