@@ -35,8 +35,8 @@ export default function App() {
     (feedbacks.good / feedbackSummary()) * 100
   );
 
-  const updateFeedback = feedbackType => {
-    const feedbackValue = feedbackType.target.value;
+  const updateFeedback = event => {
+    const feedbackValue = event.target.value;
     const setValue = {
       ...feedbacks,
       [feedbackValue]: feedbacks[feedbackValue] + 1,
