@@ -4,7 +4,6 @@ const Feedback = ({ feedbacks, positiveFeedback, totalFeedback }) => {
   const keys = Object.keys(feedbacks);
   const values = Object.values(feedbacks);
 
-  if (totalFeedback > 0) {
     const feedbackItems = keys.map((arrayItem, index) => {
       return (
         <p className={css.text} key={index}>
@@ -17,10 +16,9 @@ const Feedback = ({ feedbacks, positiveFeedback, totalFeedback }) => {
       <div>
         {feedbackItems}
         <p className={css.text}>total: {totalFeedback}</p>
-        <p className={css.text}>positive: {positiveFeedback}%</p>
+        <p className={css.text}>positive: {positiveFeedback}</p>
       </div>
     );
-  }
 };
 
 export default Feedback;

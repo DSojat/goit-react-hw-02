@@ -31,9 +31,9 @@ export default function App() {
     return feedbackClick;
   };
 
-  const percentPositiveFb = Math.round(
-    (feedbacks.good / feedbackSummary()) * 100
-  );
+  const percentPositiveFb = () => {
+    return Math.round((feedbacks.good / feedbackSummary()) * 100);
+  }
 
   const updateFeedback = event => {
     const feedbackValue = event.target.value;
@@ -67,7 +67,7 @@ export default function App() {
         <Feedback
           feedbacks={feedbacks}
           totalFeedback={feedbackSummary()}
-          positiveFeedback={percentPositiveFb}
+          positiveFeedback={percentPositiveFb()+"%"}
         ></Feedback>
       ) : (
         <Notification>No feedback yet</Notification>
